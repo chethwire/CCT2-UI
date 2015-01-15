@@ -1,0 +1,165 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div ng-file-drop class="jumbotron" id="uploadJumbotron">
+    <div class="container">
+        <p class="lead">{{lead}}
+            <!--<pre>{{collection}}</pre>-->
+        </p>
+
+        <div class="row">
+            <div class="panel panel-default col-lg-offset-2 col-lg-8" ng-hide="uploading || analyzing || uploadSummary">
+
+                <div class="panel-body">
+                    <div class="row uploaderRow">
+                        <div class="col-lg-4 uploaderButtonArea">
+                            <span for="csvInput"><b>Upload</b> a CSV</span>
+                            <input type="file" accept=".csv" id="csvInput" ng-file-select
+                                   onchange="angular.element(this).scope().$emit('csvfile:add', this.files ? this.files : this);"
+                                   style="height:40px;"/>
+
+                        </div>
+                        <div class="over col-lg-8" ng-file-over><p class="text-muted text-center"><i>Drag and drop a
+                            file
+                            here</i></p></div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div ng-show="uploading">
+                <div class="uploading-panel panel panel-default col-lg-6 col-lg-offset-3">
+                    <div ng-show="uploader.queue.length">
+                        <div class="row uploader-heading">
+                            <div class="col-lg-9 uploading-text-div">
+                            <span class="uploading-text">
+                            Uploading</span>
+                            </div>
+                            <div class="col-lg-3 percentage-text-div"><span class="percentage-text">{{uploader.progress}}%</span>
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-striped active" role="progressbar"
+                                 aria-valuenow="{{ uploader.progress }}"
+                                 aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width': uploader.progress + '%' }">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <p class="text-center upload-cancel-p"><a href="/collections">cancel</a></p>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 upload-errors-panel" ng-show="uploadSummary">
+
+                <div ng-show="invalidMembersCount">
+                    <div class="media">
+                        <div class="pull-left">
+                            <i class="icon-exclamation-sign icon-3x media-object"
+                               style="color: rgb(214, 75, 55); padding-left: 5px;"></i>
+                        </div>
+                        <div class="media-body">
+                            <p>{{totalMembers}} items uploaded, but some of them have problems!</p>
+                        </div>
+
+
+                    </div>
+
+                    <a href="/collections" class="pull-left" style="font-size: small;">cancel</a>
+                    <a href="/collections/publish" class="pull-right btn btn-primary">Ignore errors & continue <i
+                            class="icon icon-circle-arrow-right"></i></a>
+                </div>
+                <div ng-hide="invalidMembersCount">
+                    <div class="media">
+                        <div class="pull-left">
+                            <i class="icon-ok-sign icon-3x media-object"
+                               style="color: #008000; padding-left: 5px;"></i>
+                        </div>
+                        <div class="media-body">
+                            <p>Looks good!</p>
+                        </div>
+
+
+                    </div>
+
+                    <a href="/collections/" class="pull-left" style="font-size: small;">cancel</a>
+                    <a href="/collections/publish" class="pull-right btn btn-primary">Continue <i
+                            class="icon icon-circle-arrow-right"></i></a>
+                </div>
+
+            </div>
+
+            <div class="panel panel-default col-lg-6 col-lg-offset-3 col-md-3 col-md-offset-3" ng-show="analyzing">
+                <p class="text-center"> Analyzing items, this may take a moment. <img
+                        src="/images/CCT_processing.png"
+                        class="icon-spin-reverse"
+                        style="margin-top: 10px;"></p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="container" ng-show="uploadSummary">
+    <div class="panel  col-lg-10 col-lg-offset-1">
+        <div class="clearfix"></div>
+        <p class="lead">Review & edit your catalog below.
+        </p>
+
+        <div class="row">
+            <div class="col-xs-3 col-lg-3 col-md-6">
+                <form>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="icon icon-search"></i></span>
+                        <input type="text" class="form-control input-sm" placeholder="Find within your catalog"
+                               ng-model="searchText">
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-3 col-lg-3 col-md-6" ng-hide="addingMember">
+                <form>
+                    <div class="input-group">
+
+                        <input type="text" class="form-control input-sm" placeholder="Add new member id"
+                               ng-model="newMemberId">
+                        <span class="input-group-btn">
+        <button class="btn btn-sm btn-default" type="button" ng-click="addNewMember()">Add</button>
+      </span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-6 col-lg-6 col-md-6" ng-show="addingMember"><span ng-show="addingMember">{{addMemberResultString}}</span>
+            </div>
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default" ng-click="setFilter('errors')"
+                        ng-class="{'filterBtn' : !isFilteredByError(),'filterBtn-active': isFilteredByError() }">
+
+                    Errors <span class="badge"
+                                 style="background-color: rgb(214, 75, 55);">{{invalidMembersCount}}</span>
+                </button>
+                <button type="button" class="btn btn-default" ng-click="setFilter('all')"
+                        ng-class="{'filterBtn' : !isFilteredByAll(),'filterBtn-active': isFilteredByAll() }">
+
+                    All <span class="badge">{{totalMembers}}</span>
+                </button>
+            </div>
+
+
+        </div>
+
+
+        <!-- use this line below to enable sortable list: -->
+        <ul class="list-group" ui-sortable="sortableOptions" ng-model="members">
+            <!--<ul class="list-group" id="member-list-group">-->
+            <li class="list-group-item member-list-item"
+                ng-repeat="member in members | filter:searchText | filter:filterByType">
+                <div class="row" click-to-edit member="member" delete-member="deleteMember(member)" collection="collection"
+                     publisher-id="{{publisherId}}">
+                </div>
+
+            </li>
+        </ul>
+        <h3 ng-hide="collection.members.length">Your collection is empty.</h3>
+
+    </div>
+</div>

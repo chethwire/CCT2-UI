@@ -1,0 +1,38 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div ng-file-drop class="subHeader">
+    <div class="container" ng-show="viewType==='edit'">
+        <p class="lead">Edit Collection</p>
+    </div>
+    <div class="container" ng-show="viewType==='saving'">
+        <p class="lead">Saving...</p>
+
+        <div class="panel panel-default col-lg-6 col-lg-offset-3" >
+            <p class="text-center"> Updating your collection, this may take a moment. <img
+                    src="/images/CCT_processing.png"
+                    class="icon-spin-reverse"
+                    style="margin-top: 10px;"></p></div>
+
+
+    </div>
+    <div class="container" ng-show="viewType==='success'">
+        <p class="lead">Success!</p>
+        <div class="row">
+            <div class="panel panel-default col-lg-8 col-lg-offset-2">
+                <div class="panel-body">
+                    <div class="row">
+                        <i class="icon-ok-sign icon-3x pull-left" style="color:#62c462"></i>
+
+                        <p>Your collection has been updated successfully.</p>
+                        <a href="/collections/details/{{collection.collectionId}}" class="btn btn-primary pull-right">View
+                            collection details <i
+                                    class="icon-circle-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-show="viewType==='edit'">
+    <collection-editor></collection-editor>
+</div>

@@ -1,0 +1,185 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html ng-app="cctuiApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+
+    <!-- build:css(.tmp) /styles/main.css -->
+    <link rel="stylesheet" href="/styles/main.css">
+    <!-- endbuild -->
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italica"
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/bower_components/jquery-ui/themes/flick/jquery-ui.css">
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.css">
+    <link rel="stylesheet" href="/bower_components/filament-sticky/fixedsticky.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="/bower_components/select2/select2.css">
+    <script src="/bower_components/bugsense/lib/bugsense.js"></script>
+
+    <script type="text/javascript">
+        var bugsense = new Bugsense({ apiKey: "498a0d27" });
+    </script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-44606729-1', 'highwire.org');
+
+    </script>
+</head>
+<body ng-controller="AppCtrl" ng-style="setStyle()">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="/bower_components/es5-shim/es5-shim.js"></script>
+<script src="/bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+<div id="wrap">
+    <div ng-include="'/views/header.html'">
+        <div ng-if="!isActive('/lp')"></div>
+    </div>
+    <div ng-include="'/views/notifications.html'">
+        <div ng-if="!isActive('/lp')"
+             ng-show="notifications.getCurrent().length >0"></div>
+    </div>
+
+    <div ng-view></div>
+</div>
+<div id="footer">
+    <p class="credit">&copy; 1995-{{currentYear}} Highwire Press <small class="text-muted">v{{version}}</small></p>
+</div>
+
+
+<script src="/bower_components/jquery/jquery.js"></script>
+<script type="text/javascript" src="/bower_components/jquery.cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="/bower_components/select2/select2.js"></script>
+
+<script  src="/bower_components/angular/angular.js"></script>
+
+<script src="/scripts/config.js"></script>
+
+<!-- build:js /scripts/plugins.js -->
+
+<!-- endbuild -->
+
+<!-- build:js /scripts/modules.js -->
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/affix.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/alert.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/modal.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/transition.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/button.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/popover.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/carousel.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/collapse.js"></script>
+<script src="/bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/tab.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-local-storage/angular-local-storage.js"></script>
+<script src="/bower_components/get-style-property/get-style-property.js"></script>
+<script src="/bower_components/get-size/get-size.js"></script>
+<script src="/bower_components/eventie/eventie.js"></script>
+<script src="/bower_components/doc-ready/doc-ready.js"></script>
+<script src="/bower_components/eventEmitter/EventEmitter.js"></script>
+<script src="/bower_components/jquery-bridget/jquery.bridget.js"></script>
+<script src="/bower_components/matches-selector/matches-selector.js"></script>
+<script src="/bower_components/imagesloaded/imagesloaded.js"></script>
+<script src="/bower_components/outlayer/item.js"></script>
+<script src="/bower_components/outlayer/outlayer.js"></script>
+<script src="/bower_components/masonry/masonry.js"></script>
+<script src="/bower_components/jquery-ui/ui/jquery-ui.js"></script>
+<!--Touch pad feature disabled-->
+<!--<script src="/vendor/jquery.ui.touch-punch.js"></script>-->
+<script src="/bower_components/angular-masonry/angular-masonry.js"></script>
+<script src="/bower_components/speakingurl/lib/index.js"></script>
+<script src="/bower_components/filament-sticky/fixedsticky.js"></script>
+<script src="/bower_components/angulartics/src/angulartics.js"></script>
+<script src="/bower_components/angulartics/src/angulartics-ga.js"></script>
+<script src="/bower_components/bootstrap-select/bootstrap-select.js"></script>
+<!-- ACCORDIONS USING ANGULAR-BOOTSTRAP -->
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/bower_components/angular-strap/dist/angular-strap.js"></script>
+<!-- <script src="/bower_components/angular-strap-2.1.1/dist/angular-strap.js"></script> -->
+<script src="/bower_components/angular-ui-sortable/src/sortable.js"></script>
+<script src="/bower_components/angular-ui-select2/src/select2.js"></script>
+<script src="/bower_components/angular-ui-date/src/date.js"></script>
+
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) /scripts/scripts.js -->
+<script src="/scripts/app.js"></script>
+<script src="/scripts/controllers/collections.js"></script>
+<script src="/scripts/services/authorization.js"></script>
+<script src="/scripts/services/collectionsSvc.js"></script>
+<script src="/scripts/services/crud.js"></script>
+<script src="/scripts/services/security.js"></script>
+<script src="/scripts/services/security.index.js"></script>
+<script src="/scripts/services/retryQueue.js"></script>
+<script src="/scripts/services/login.js"></script>
+<script src="/scripts/controllers/loginForm.js"></script>
+<script src="/scripts/services/i18nNotifications.js"></script>
+<script src="/scripts/services/localizedMessages.js"></script>
+<script src="/scripts/services/interceptor.js"></script>
+<script src="/scripts/services/notifications.js"></script>
+<script src="/scripts/services/httpRequestTracker.js"></script>
+<script src="/scripts/services/xml2js.js"></script>
+<script src="/scripts/directives/toolbar.js"></script>
+<script src="/scripts/services/titleService.js"></script>
+<script src="/scripts/services/fileUploader.js"></script>
+<script src="/scripts/directives/fileupload.js"></script>
+<script src="/scripts/filters/truncate.js"></script>
+<script src="/scripts/directives/datePicker.js"></script>
+<script src="/scripts/directives/filterMenu.js"></script>
+<script src="/scripts/controllers/settings.js"></script>
+<script src="/scripts/services/settingsSvc.js"></script>
+<script src="/scripts/controllers/landingPage.js"></script>
+<script src="/scripts/directives/uniqueLandingPage.js"></script>
+<script src="/scripts/directives/addRowSearchCond.js"></script>
+<script src="/scripts/directives/uniqueRSS.js"></script>
+<script src="/scripts/controllers/rss.js"></script>
+<script src="/scripts/directives/charLimit.js"></script>
+<script src="/scripts/controllers/health.js"></script>
+<script src="/scripts/services/catalog.js"></script>
+<script src="/scripts/filters/htmlToPlaintext.js"></script>
+<script src="/scripts/filters/pgStart.js"></script>
+<script src="/scripts/filters/descrParseUrl.js"></script>
+<script src="/scripts/directives/collectionEditor.js"></script>
+<script src="/scripts/directives/clickToEdit.js"></script>
+<script src="/scripts/services/validate.js"></script>
+<script src="/scripts/directives/autofill.js"></script>
+<script src="/scripts/directives/collectionEditorCitations.js"></script>
+<script src="/scripts/directives/descriptionParseUrl.js"></script>
+<script src="/scripts/filters/strToDate.js"></script>
+<!-- endbuild -->
+</body>
+</html>

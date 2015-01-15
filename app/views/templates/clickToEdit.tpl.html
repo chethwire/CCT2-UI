@@ -1,0 +1,53 @@
+<div class="click-to-edit">
+
+    <div ng-if="!member.citation && !member.error" style="padding-left:16px;"><span
+            class="h4">Loading details for {{member.id}}...</span>
+    </div>
+
+    <div ng-show="!view.editorEnabled && member.error && !member.citation">
+        <div class="col-lg-10">
+            <i class="icon icon-exclamation-sign icon-large" style="color: rgb(214, 75, 55);"></i> <span
+                class="h4" style="color: rgb(214, 75, 55);">{{member.id}}</span>
+            <span>{{member.error}}</span>
+        </div>
+        <div class="col-lg-1">
+            <i class="icon icon-pencil" id="edit-member"></i> <a href="" ng-click="enableEditor()">edit</a>
+        </div>
+        <div class="col-lg-1" id="remove-member">
+            <i class="icon icon-trash"></i> <a href="" ng-click="deleteMember(member)">remove</a>
+        </div>
+    </div>
+    <div ng-show="!view.editorEnabled && member.citation && !member.error">
+        <div class="col-lg-10" style="padding-left:16px;">
+            <span class="h4">{{member.citation.title | htmlToPlaintext}}</span><span
+                ng-show="member.citation.['is-embargo']"> (Publication Date: {{member.citation['pub-date']}})</span>
+        </div>
+        <div class="col-lg-1">
+            <i class="icon icon-pencil" id="edit-member"></i> <a href="" ng-click="enableEditor()">edit</a>
+        </div>
+        <div class="col-lg-1" id="remove-member">
+            <i class="icon icon-trash"></i> <a href="" ng-click="deleteMember(member)">remove</a>
+        </div>
+    </div>
+    <div ng-show="!view.editorEnabled && member.citation && member.error">
+        <div class="col-lg-10" style="padding-left:16px;">
+            <i class="icon icon-exclamation-sign icon-large" style="color: rgb(214, 75, 55);"></i>
+            <span class="h4" style="color: rgb(214, 75, 55);">{{member.citation.title | htmlToPlaintext}} {{member.id}}</span>
+            <span>{{member.error}}</span>
+        </div>
+        <div class="col-lg-1">
+            <i class="icon icon-pencil" id="edit-member"></i> <a href="" ng-click="enableEditor()">edit</a>
+        </div>
+        <div class="col-lg-1" id="remove-member">
+            <i class="icon icon-trash"></i> <a href="" ng-click="deleteMember(member)">remove</a>
+        </div>
+    </div>
+
+    <div ng-show="view.editorEnabled">
+        <input ng-model="view.editableValue">
+        <a href="#" ng-click="save()">Save</a>
+        or
+        <a ng-click="disableEditor()">cancel</a>
+    </div>
+
+</div>

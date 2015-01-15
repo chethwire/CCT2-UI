@@ -1,0 +1,94 @@
+<div class="fixedsticky filterMenu">
+    <div class="row">
+        <label class="control-label" style="margin-left:10px;">Filter collections by:</label>
+
+        <div class="btn-group">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" ng-click="setKeywordInputFocus()"><i
+                        class="icon icon-tag icon-primary"  ></i> Text
+
+                </button>
+                <ul class="dropdown-menu" id="keyword-dropdown">
+                    <form class="keyword-dropdown" ng-submit="addKeyword(currentKeyword)">
+                        <div class="form-group">
+                            <input type="text" name="keyword" id="keyword" class="form-control"
+                                   ng-model="currentKeyword">
+                        </div>
+                        <input type="submit"  style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+                    </form>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon icon-calendar icon-primary"></i> Date Range
+
+                </button>
+                <ul class="dropdown-menu" id="date-dropdown">
+                    <form class="date-dropdown" ng-submit="addDate(currentDate)">
+                        <div class="form-group">
+                            <label for="startDate">Start</label>
+                            <input type="text" name="startDate" id="startDate" ui-date="startDateOptions" class="form-control"
+                                   ng-model="currentDate.startDate">
+                            <label for="endDate">End</label>
+                            <input type="text" name="endDate" id="endDate" ui-date="endDateOptions" class="form-control"
+                                   ng-model="currentDate.endDate">
+                        </div>
+                        <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
+                        <!--<button type="button" class="btn btn-primary" ng-click="addKeyword(currentKeyword)">Add</button>-->
+
+                    </form>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i
+                        class="icon icon-group icon-primary"></i> Status
+
+                </button>
+                <ul class="dropdown-menu" id="status-dropdown">
+                    <li>
+                        <label>Published</label> <input type="checkbox" id="publishedCheckbox" class=""
+                                                         ng-model="statuses.Published">
+
+                    </li>
+
+                    <li>
+                        <label >
+                            Unpublished</label><input type="checkbox" id="unpublishedCheckbox" class=""
+                                              ng-model="statuses.Unpublished">
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <label class="control-label" style="margin-left: 50px;">Sort by:</label>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-default" ng-click="sort('dateAdded')"
+                    ng-class="{'active': isSortDown('dateAdded') || isSortUp('dateAdded')}">
+                <i
+                        ng-class="{'icon icon-caret-up icon-primary' : isSortUp('dateAdded'),  'icon icon-caret-down icon-primary': isSortDown('dateAdded')}"></i>
+                Date
+            </button>
+            <button type="button" class="btn btn-default" ng-click="sort('name')"
+                    ng-class="{'active': isSortDown('name') || isSortUp('name')}">
+                <i
+                        ng-class="{'icon icon-caret-up icon-primary' : isSortUp('name'), 'icon icon-caret-down icon-primary': isSortDown('name')}"></i>
+                Name
+            </button>
+        </div>
+
+
+        <div class="btn-group pull-right" style="margin-right:10px;">
+            <button type="button" class="btn btn-default" ng-click="setViewType('cardView')"
+                    ng-class="{'active' : view=='cardView'}"><i
+                    class="icon-th icon-large"></i>
+            </button>
+            <button type="button" class="btn btn-default" ng-click="setViewType('listView')"
+                    ng-class="{'active' : view=='listView'}"><i
+                    class="icon-list-ul icon-large"></i>
+            </button>
+        </div>
+    </div>
+</div>

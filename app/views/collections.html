@@ -1,0 +1,348 @@
+<div ng-switch on="hasCollections">
+<div ng-switch-when="false" id="emptyCollectionDiv">
+    <!-- empty collection view -->
+    <div class="jumbotron">
+        <div class="container">
+            <div>
+                <p class="lead">You haven't created any collections yet!</p>
+
+                <p>Creating collections is easy</p>
+                <ol>
+
+                    <li>Just click on "New Collection"</li>
+                    <li>Upload your DOI's or search content to add</li>
+                    <li>Save them to a new collection, and publish for the world to see</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-switch-when="true" id="nonEmptyCollectionDiv">
+<div ng-show="view != 'detailsView'">
+    <filter-menu></filter-menu>
+    <div class="keywordBar dn-fade"
+         ng-show="keywords.length || (currentDate.startDate && currentDate.startDate)">
+        <button type="button" class="btn btn-default dn-fade" ng-repeat="keyword in keywords"
+                ng-click="removeKeyword(keyword)">{{keyword}} <i
+                class="icon icon-remove-sign icon-primary icon-large"></i>
+        </button>
+        <button type="button" class="btn btn-default dn-fade"
+                ng-show="currentDate.startDate && currentDate.startDate"
+                ng-click="removeDate()">{{currentDate.startDate | date:'MM/dd/yyyy'}} - {{currentDate.endDate |
+            date:'MM/dd/yyyy'}} <i
+                    class="icon icon-remove-sign icon-primary icon-large"></i>
+        </button>
+    </div>
+</div>
+<div ng-switch on="view">
+    
+<!-- details view-->
+<div ng-switch-when="detailsView" class="details-view">
+
+    <!-- details header-->
+    <div class="collectionDetails filterMenu">
+        <div class="row">
+                        <span class="col-lg-12 col-md-12 col-sm-12">RSS Feed URL: <a target="_blank"
+                                                                                     ng-show="selectedCollection.rssUploadId"
+                                                                                     href="/svc/getfile?fileId={{selectedCollection.rssUploadId}}&publisherId={{selectedCollection.publisherId}}">{{webBaseUrl}}/svc/getfile?fileId={{selectedCollection.rssUploadId}}&publisherId={{selectedCollection.publisherId}}</a></span>
+
+            <div class="row">
+                        <span class="col-lg-11 col-md-11 col-sm-10">Landing Page URL: <a target="_blank"
+                                                                                         href="{{publisherSettings.defaultLandingPagePath}}/{{selectedCollection.landingPageId}}">{{publisherSettings.defaultLandingPagePath}}/{{selectedCollection.landingPageId}}</a></span>
+                                                                                        
+
+                <div class="pull-right col-lg-1 col-md-1 col-sm-2" ng-click="closeCollectionDetails()"
+                     id="collectionDetailsCloseDiv">
+                    close <i class="icon icon-remove-sign icon-primary icon-large"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-8 details-main">
+                <h4>{{selectedCollection.name}}</h4>
+                <!--<p ng-bind-html = "selectedCollection.description"></p>-->
+         
+                <pre style="font-family:inherit;background-color:transparent;border:none;" description-parse-url ng-model = "selectedCollection.description"></pre>
+
+                <h5 ng-show="!selectedCollection.citation">Loading...</h5>
+                <!--<span ng-show="selectedCollection.citation.data.totalResults > 10" class="pull-right"><a-->
+                <!--id="prev-button" href="">&larr;prev</a><a href="" id="next-button">-->
+                <!--next&rarr;</a></span>-->
+                <ul class="list-group citations-list">
+                    <div ng-show="showPgn">
+                            <span ng-if="currentPg < selectedCollection.citation.length/pgSize - 1" style="position:relative;top:20px;left:300px;"> Showing items {{1 +currentPg * pgSize}} - {{pgSize * [currentPg + 1]}} of {{selectedCollection.citation.length}} items</span>
+                            <span ng-if="currentPg >= selectedCollection.citation.length/pgSize - 1" style="position:relative;top:20px;left:300px;">Showing items {{1 +currentPg * pgSize}} - {{selectedCollection.citation.length}} of {{selectedCollection.citation.length}} items</span>
+                            <button style="margin-left:700px;" ng-disabled="currentPg == 0" ng-click="currentPg=currentPg-1"> Previous </button>
+                            <button class = "pull-right" ng-disabled="currentPg >= selectedCollection.citation.length/pgSize - 1" ng-click="currentPg=currentPg+1"> Next </button>
+                    </div>
+                    <li class="list-group-item"
+                        ng-repeat="citation in selectedCollection.citation | pgStart:currentPg*pgSize | limitTo:pgSize">
+                        
+
+                        <div ng-if = "citation.atype == 'article'">
+                            <div ng-if = "selectedCollection.artCitationFmt == 'default' || selectedCollection.artCitationFmt == 'articleDefault'">
+                                <h4>
+                                            <a target="_blank" href="{{citation['url']}}">{{citation.title |
+                                                htmlToPlaintext}}</a></h4>
+                                                
+                                        <h5>Journal Article: <span ng-bind-html="citation['abbr-journal-title']"></span></h5>
+                                        <p>
+                                            {{citation['pub-date']|date:'mediumDate'}}
+                                        </p>
+                            </div>
+                        </div>
+                        <div ng-if = "citation.atype == 'article' && selectedCollection.artCitationFmt == 'articleFormat1' ">
+                            <h4>
+                                    <a target="_blank" href="{{citation['url']}}">{{citation.title |
+                                        htmlToPlaintext}}</a></h4>
+                                        
+                                <h5>Journal Article: <span ng-bind-html="citation['abbr-journal-title']"></span></h5>
+                                <span ng-if="citation.authors" ng-repeat="author in citation.authors">
+                                        <!-- 1 author-->
+                                        <span style="position:relative;top:-10px;" ng-if="$first && $last">{{author}}</span>
+                                        <!-- 2+ authors-->
+                                        <span style="position:relative;top:-10px;" ng-if="$first && !$last">{{author}},</span>
+                                        <span style="position:relative;top:-10px;" ng-if="!$last && !$first">{{author}},</span>
+                                        <span style="position:relative;top:-10px;" ng-if="$last && !$first">and {{author}}</span>
+                                </span>
+                                        <br ng-if="citation.authors"><span><b> Date:</b></span>
+                                        <span> {{citation['pub-date']|date : 'mediumDate'}} </span>&nbsp;&nbsp;
+                                        <span> <b>DOI:</b> </span>
+                                        <span ng-bind-html="citation['doi']"></span>                                        
+                        </div>
+                        <div ng-if = "citation.atype == 'article' && selectedCollection.artCitationFmt == 'articleFormat2' ">
+                            <h4>
+                                    <a target="_blank" href="{{citation['url']}}">{{citation.title |
+                                        htmlToPlaintext}}</a></h4>
+                                        
+                                <h5>Journal Article: <span ng-bind-html="citation['abbr-journal-title']"></span></h5>
+                                <span ng-if="citation.authors" ng-repeat="author in citation.authors">
+                                        <!-- 1 author-->
+                                        <span style="position:relative;top:-10px;" ng-if="$first && $last">{{author}}</span>
+                                        <!-- 2+ authors-->
+                                        <span style="position:relative;top:-10px;" ng-if="$first && !$last">{{author}},</span>
+                                        <span style="position:relative;top:-10px;" ng-if="!$last && !$first">{{author}},</span>
+                                        <span style="position:relative;top:-10px;" ng-if="$last && !$first">and {{author}}</span>
+                                </span>                                       
+                                        <!--<h5>Date:</h5>-->
+                                        <br ng-if="citation.authors"><span><b> Date:</b></span>
+                                        <span> {{citation['pub-date']|date : 'mediumDate'}} </span>
+                        </div>
+                        <!--<div ng-switch on="citation.atype"> -->                          
+
+                            <div ng-if=" citation.atype == 'book' || citation.atype == 'edition' ">
+                                <div ng-if="selectedCollection.bkCitationFmt == 'default' || selectedCollection.bkCitationFmt == 'bookDefault' ">
+                                    <h4>
+                                        <a target="_blank" href="{{citation['url']}}">{{citation.title |
+                                            htmlToPlaintext}}</a></h4>
+                                    <h5>Book </h5>
+                                    <p>
+                                        {{citation['pub-date']|date:'mediumDate'}}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div ng-if=" citation.atype == 'book' || citation.atype == 'edition' ">
+                                <div ng-if="selectedCollection.bkCitationFmt == 'bookFormat1' ">
+                                    <h4>
+                                        <a target="_blank" href="{{citation['url']}}">{{citation.title |
+                                            htmlToPlaintext}}</a></h4>    
+                                    <h5>Book </h5>                                
+                                    <span ng-if="citation.authors" ng-repeat="author in citation.authors">
+                                                <!-- 1 author-->
+                                                <span style="position:relative;top:-10px;" ng-if="$first && $last">{{author}}</span>
+                                                <!-- 2+ authors-->
+                                                <span style="position:relative;top:-10px;" ng-if="$first && !$last">{{author}},</span>
+                                                <span style="position:relative;top:-10px;" ng-if="!$last && !$first">{{author}},</span>
+                                                <span style="position:relative;top:-10px;" ng-if="$last && !$first">and {{author}}</span>
+                                    </span>
+                                                <br ng-if="citation.authors"><span><b> Date:</b></span>
+                                                <span> {{citation['pub-date']|date : 'mediumDate'}} </span> &nbsp;&nbsp;
+                                                <span> <b>eISBN:</b></span>
+                                                <span ng-bind-html="citation['eisbn']"></span>
+
+                                </div>
+                            </div>
+
+                            <div ng-if=" citation.atype == 'book' || citation.atype == 'edition' ">
+                                <div ng-if="selectedCollection.bkCitationFmt == 'bookFormat2' ">
+                                    <h4>
+                                        <a target="_blank" href="{{citation['url']}}">{{citation.title |
+                                            htmlToPlaintext}}</a></h4>
+                                    <h5>Book </h5>
+                                    <span ng-if="citation.authors" ng-repeat="author in citation.authors">
+                                                <!-- 1 author-->
+                                                <span style="position:relative;top:-10px;" ng-if="$first && $last">{{author}}</span>
+                                                <!-- 2+ authors-->
+                                                <span style="position:relative;top:-10px;" ng-if="$first && !$last">{{author}},</span>
+                                                <span style="position:relative;top:-10px;" ng-if="!$last && !$first">{{author}},</span>
+                                                <span style="position:relative;top:-10px;" ng-if="$last && !$first">and {{author}}</span>
+                                    </span>
+                                                <!--<h5>Date:</h5> -->
+                                                <br ng-if="citation.authors"><span><b> Date:</b></span>
+                                                <span> {{citation['pub-date']|date : 'mediumDate'}} </span>
+                                </div>                                                        
+                            </div>                            
+                        
+                    </li>
+                </ul>
+                <div ng-show="showPgn">
+                    <span ng-if="currentPg < selectedCollection.citation.length/pgSize - 1" style="position:relative;top:20px;left:300px;"> Showing items {{1 +currentPg * pgSize}} - {{pgSize * [currentPg + 1]}} of {{selectedCollection.citation.length}} items </span>
+                    <span ng-if="currentPg >= selectedCollection.citation.length/pgSize - 1" style="position:relative;top:20px;left:300px;">Showing items {{1 +currentPg * pgSize}} - {{selectedCollection.citation.length}} of {{selectedCollection.citation.length}} items</span>
+                    <button style="margin-left:700px;" ng-disabled="currentPg == 0" ng-click="currentPg=currentPg-1"> Previous </button>
+                    <button class = "pull-right" ng-disabled="currentPg >= selectedCollection.citation.length/pgSize - 1" ng-click="currentPg=currentPg+1"> Next </button>
+                </div>                    
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-4 details-side-bar">
+                <img class=" img-responsive details-image" ng-show="selectedCollection.featureImageId"
+                     ng-src="{{apiBaseUrl}}/{{selectedCollection.featureImageId}}.jpg?action=getFile&fileId={{selectedCollection.featureImageId}}&publisherId={{publisherId}}">
+                <a href="/collections/edit/{{selectedCollection.collectionId}}">Edit details
+                </a><br>
+                <a href="/collections/editmembers/{{selectedCollection.collectionId}}"> Edit members
+                </a>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6"><strong>Contains</strong></div>
+                    <div class="col-lg-6 col-md-6">{{selectedCollection.members.length}} items</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6"><strong>Created</strong></div>
+                    <div class="col-lg-6 col-md-6">{{selectedCollection.dateAdded | date : 'mediumDate'}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6"><strong>Updated</strong></div>
+                    <div class="col-lg-6 col-md-6">{{selectedCollection.modifiedOn| strToDate | date : 'mediumDate'}}
+                    </div>
+                </div>
+                <!--<div class="row">-->
+                <!--<div class="col-lg-6">Sale price:</div>-->
+                <!--<div class="col-lg-6" ng-if="selectedCollection.ecommerceEnabled">-->
+                <!--${{selectedCollection.individualPrice}}-->
+                <!--</div>-->
+                <!--<div class="col-lg-6" ng-if="!selectedCollection.ecommerceEnabled">-->
+                <!--eCom Disabled-->
+                <!--</div>-->
+
+                <!--</div>-->
+                <div class="row">
+                    <div class="col-lg-6 col-md-6"><strong>Status</strong></div>
+                    <div class="col-lg-6 col-md-6">{{selectedCollection.status}}</div>
+                </div>
+                <div ng-if="selectedCollection.keywords.length">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6"><strong>Keywords</strong></div>
+                        <div class="col-lg-6 col-md-6">{{collectionKeywords}}</div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-switch-when="listView">
+
+    <!--List view-->
+    <div class="container" id="collection-listview-container">
+        <div class="list-group">
+            <a class="list-group-item"
+               ng-repeat="collection in filteredCollections = (collections | filter:collectionFilter | orderBy:sortField:reverse)">
+                <div ng-click="showDetails(collection.collectionId)"
+                     id="collection-{{collection.collectionId}}">
+                    <img class="pull-left  img-responsive"
+                         style="width:100px;margin-right:10px;" ng-if="collection.featureImageId"
+                         ng-src="{{apiBaseUrl}}/{{selectedCollection.featureImageId}}.jpg?action=getFile&fileId={{collection.featureImageId}}&publisherId={{publisherId}}">
+
+                    <h4 class="list-group-item-heading">{{collection.name}}</h4>
+
+                    <p class="list-group-item-text" description-parse-url ng-model = "collection.description"></p>
+
+                    <!--<p class="list-group-item-text">{{collection.description}}</p>-->
+
+                    <p class="text-muted">Status: {{collection.status}}, Created: {{collection.dateAdded |
+                        date :'mediumDate'}}, Updated: {{collection.modifiedOn| strToDate | date : 'mediumDate'}}</p>
+
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div ng-switch-when="cardView">
+    <!--card view-->
+
+    <div class="container" class="cardView">
+        <div masonry="{ isInitLayout: false }" id="cardView">
+            <div class="masonry-brick col-lg-4 col-md-6 col-sm-6 col-xs-12"
+                 ng-repeat="collection in filteredCollections = (collections | filter:collectionFilter | orderBy:sortField:reverse)">
+                 
+                    <div class="panel panel-default brick" ng-click="showDetails(collection.collectionId)"
+                            >
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{collection.name}}</h3>
+
+                        </div>
+                        <div ng-show="collection.featureImageId"
+                             class="panel-body brick-image img-responsive"
+                             ng-style="{'background-image': 'url('+apiBaseUrl+'/'+collection.featureImageId+'.jpg?action=getFile&fileId='+collection.featureImageId+'&publisherId='+publisherId+')'}"
+                                >
+                            <img ng-src="{{apiBaseUrl}}/{{selectedCollection.featureImageId}}.jpg?action=getFile&fileId={{collection.featureImageId}}&publisherId={{publisherId}}"
+                                 style="visibility:hidden"/>
+                        </div>
+
+                        <div class="panel-footer card-footer">
+                            <div style="background-color: #545454;color:white;padding-left: 10px; padding-right: 10px; padding-bottom: 2px;" >
+                                <p style="margin-bottom: 0" ng-bind-html="collection.description | descrParseUrl | htmlToPlaintext | truncate:200 "></p>                                               
+                            </div>
+                            <div class="card-final-footer">
+
+
+                                <div ng-if="collection.modifiedOn"><i class="icon icon-calendar"></i>
+                                    Updated:
+                                    {{collection.modifiedOn| strToDate | date : 'mediumDate'}}
+                                    <br/>
+                                            <span class="pull-right"><i
+                                                    class="icon icon-group"></i> {{collection.status}}</span>
+                                    Created: {{collection.dateAdded | date: 'mediumDate'}}
+                                </div>
+
+                                <div ng-if="!collection.modifiedOn"><i class="icon icon-calendar"></i>
+                                            <span class="pull-right"><i
+                                                    class="icon icon-group"></i> {{collection.status}}
+                                            </span>
+                                    Price: ${{collection.individualPrice}}<br>
+                                    Created: {{collection.dateAdded|date:'mediumDate'}}
+                                </div>
+                            </div>
+                        </div>
+                    
+            </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div ng-switch-when="emptyView">
+    <!--blank view to show while masonry layout is being updated after sort-->
+    Loading...
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+

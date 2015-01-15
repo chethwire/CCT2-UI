@@ -1,0 +1,145 @@
+<div ng-include="'/views/collections.manage.html'"></div>
+<div class="container">
+<!-- <div class="tabbale"> -->
+    <ul style="margin-top:10px;" class="nav nav-tabs" role="tablist">
+        <!-- <li class="active"><a style="font-size:16px;" href="#existColl" ng-click="setCollView()" data-toggle="tab">Existing Collections</a> -->
+        <li><a style="font-size:16px;" href="#existColl" role="tab" data-toggle="tab">Existing Collections</a>
+        </li>
+        <li><a style="font-size:16px;" href="#subjTags" role="tab" data-toggle="tab">Subject Tags</a>
+        </li>
+        <li><a style="font-size:16px;" href="#search" role="tab" data-toggle="tab">Search</a>
+        </li>
+        <li><a style="font-size:16px;" href="#uploadDoi" role="tab" data-toggle="tab">Upload DOIs</a>
+        </li>
+    </ul>
+
+    <div style="width:49%;"class=" pull-left tab-content">
+    <!-- <div style="width:49%;" class="pull-left" class="tab-pane active" id="existColl" ng-show="isCollCurr"> -->
+    <div class="tab-pane fade active in" id="existColl">
+    <h5>Existing Collections</h5>        
+    <accordion close-others="true">
+        <accordion-group ng-repeat="coll in existColl | pgStart:currentPg*pgSize | limitTo:pgSize track by coll.id" is-open="existColl[(currentPg*pgSize)+$index].Open">
+            <accordion-heading>
+                <i ng-class="{'icon-minus-sign':existColl[(currentPg*pgSize)+$index].Open,'icon-plus-sign':!existColl[(currentPg*pgSize)+$index].Open}"></i>
+                <input type="checkbox"  ng-disabled="coll.checked && coll.isAdded" ng-click="chkBox(coll,$event)" ng-model="coll.checked" ng-change="getSelColl(currentPg*pgSize, $index)"><span style="padding-left:10px;" ng-style="coll.isAdded && {'color':'blue'}">{{coll.name}}</span>
+            </accordion-heading>            
+            
+            <div>
+                <ul>
+                   <!-- <li style="list-style:none;padding-bottom:10px;" ng-repeat="mem in coll.itemMem"> -->
+                    <li style="list-style:none;padding-bottom:10px;" ng-repeat="mem in existColl[(currentPg*pgSize)+$index].itemMem | pgStart:currentPgMem*pgSizeMem | limitTo:pgSizeMem">
+                        <input type="checkbox" ng-disabled="mem.checked && mem.isAdded" ng-model="mem.checked" ng-change="getSelMem(existColl[(currentPg*pgSize)+$index].itemMem,$index)">
+                        <span style="padding-left:10px;" ng-style="mem.isAdded && {'color':'blue'}">{{mem.name}}</span>
+                        <br>
+                        <!-- <span>{{mem.doi}}</span> Not Required -->
+                    </li>
+                </ul>
+                <div ng-style="coll.pgn && {'margin-top':'50px'}" class="pull-right"><button class="btn btn-primary" type="button" ng-disabled="existColl[(currentPg*pgSize)+$index].isAdded" ng-click="shwMemIncl(coll)"> Add Items </button></div>
+                
+            <div style="text-align:center;" ng-show="coll.pgn">
+                <span ng-if="currentPgMem < coll.itemMem.length/pgSizeMem - 1"> Showing items {{1 +currentPgMem * pgSizeMem}} - {{pgSizeMem * [currentPgMem + 1]}} of {{coll.itemMem.length}} items</span>
+                <span ng-if="currentPgMem >= coll.itemMem.length/pgSizeMem - 1">Showing items {{1 +currentPgMem * pgSizeMem}} - {{coll.itemMem.length}} of {{coll.itemMem.length}} items</span>
+                <button class="pull-left" ng-disabled="currentPgMem == 0" ng-click="currentPgMem=currentPgMem-1"> Previous </button>
+                <button style="position:relative;left:150px;" ng-disabled="currentPgMem >= coll.itemMem.length/pgSizeMem - 1" ng-click="currentPgMem=currentPgMem+1"> Next </button>
+            </div>
+            </div>
+        </accordion-group>
+    </accordion> 
+     <div style="margin:5px 0px 15px 0px;text-align:center;" ng-show="showPgn" ng-hide="existColl[(currentPg*pgSize)+$index].Open">
+                            <span ng-if="currentPg < existColl.length/pgSize - 1"> Showing collections {{1 +currentPg * pgSize}} - {{pgSize * [currentPg + 1]}} of {{existColl.length}} collections</span>
+                            <span ng-if="currentPg >= existColl.length/pgSize - 1" >Showing collections {{1 +currentPg * pgSize}} - {{existColl.length}} of {{existColl.length}} collections</span>
+                            <button class="pull-left" ng-disabled="currentPg == 0" ng-click="currentPg=currentPg-1"> Previous </button>
+                            <button class = "pull-right" ng-disabled="currentPg >= existColl.length/pgSize - 1" ng-click="currentPg=currentPg+1"> Next </button>
+    </div>
+    <div style="margin-top:53px;" class="pull-right"><button class="btn btn-primary" type="button"  ng-click="shwCollIncl()"> Add Collection </button></div>
+    </div>
+
+    <!--SEARCH-->
+    <div class="tab-pane fade" id="search" ng-include="'/views/collections.create.search.html'"></div>
+    </div>
+
+    <div style="width:50%;" class="pull-right">
+    <div id="coll-rules-pane">
+        <h4>Collection Rules</h4>
+        <div>
+        <accordion close-others="true">
+        <accordion-group is-open="doiRuleOpen">
+                <accordion-heading>
+                <i ng-class="{'icon-minus-sign':doiRuleOpen,'icon-plus-sign':!doiRuleOpen}"></i>
+                <span style="padding-left:5px;font-weight:bold">Upload DOIs:<span style="padding-left:4px;">selected</span>
+                </span>
+                </accordion-heading>
+                <div style="height:75px;overflow-y:scroll;">
+                    <ul>
+                        <li style="list-style:none;" ng-repeat="collNames in collIncl"><i style="margin-right:3px;" class="icon icon-remove icon-primary" ng-click="shwCollExcl($index)"></i>{{collNames.name}} ({{collNames.itemMem.length}} items)</li>
+                    </ul>
+                </div>
+        </accordion-group>
+            <accordion-group is-open="collRuleOpen">
+                <accordion-heading>
+                <i ng-class="{'icon-minus-sign':collRuleOpen,'icon-plus-sign':!collRuleOpen}"></i>
+                <span style="padding-left:5px;font-weight:bold">Existing Collections:<span style="padding-left:4px;" ng-if="collIncl">{{collIncl.length}} selected</span>
+                </span>
+                </accordion-heading>
+                <div style="height:75px;overflow-y:scroll;">
+                    <ul>
+                        <li style="list-style:none;" ng-repeat="collNames in collIncl"><i style="margin-right:3px;" class="icon icon-remove icon-primary" ng-click="shwCollExcl($index)"></i>{{collNames.name}} ({{collNames.itemMem.length}} items)</li>
+                    </ul>
+                </div>
+            </accordion-group>
+            <accordion-group is-open="subjRuleOpen">
+                <accordion-heading>
+                <i ng-class="{'icon-minus-sign':subjRuleOpen,'icon-plus-sign':!subjRuleOpen}"></i>
+                <span style="padding-left:5px;font-weight:bold">Subject Tags:<span style="padding-left:4px;" >selected</span>
+                </span>
+                </accordion-heading>
+                <div style="height:75px;overflow-y:scroll;">
+                    <ul>
+                        <li style="list-style:none;" ng-repeat="collNames in collIncl"><i style="margin-right:3px;" class="icon icon-remove icon-primary" ng-click="shwCollExcl(collNames,$index)"></i>{{collNames.name}} ({{collNames.itemMem.length}} items)</li>
+                    </ul>
+                </div>
+            </accordion-group>
+            <accordion-group is-open="searchRuleOpen">
+                <accordion-heading>
+                <i ng-class="{'icon-minus-sign':searchRuleOpen,'icon-plus-sign':!searchRuleOpen}"></i>
+                <span style="padding-left:5px;font-weight:bold">Search:<span style="padding-left:4px;">selected</span>
+                </span>
+                </accordion-heading>
+                <div style="height:75px;overflow-y:scroll;">
+                    <ul>
+                        <li style="list-style:none;" ng-repeat="collNames in collIncl"><i style="margin-right:3px;" class="icon icon-remove icon-primary" ng-click="shwCollExcl($index)"></i>{{collNames.name}} ({{collNames.itemMem.length}} items)</li>
+                    </ul>
+                </div>
+            </accordion-group>
+            
+        
+        <accordion-group>
+            <accordion-heading>        
+            <h5 style="padding-left:5px;font-size:16px;">Results: {{collMemCnt}} items in this collection</h5>
+            </accordion-heading>
+            <div style="height:75px;overflow-y:scroll;">
+                <div ng-if="selColl">
+                    <div ng-repeat="coll in selColl">
+                        <div ng-repeat="selItems in coll.itemMem">
+                            <ul>
+                                <li style="list-style:none;" ng-if="selItems.isAdded"><i style="margin-right:3px;" class="icon icon-remove icon-primary" ng-click="shwCollMemExcl(coll,$index)"></i>{{selItems.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="selMem">
+                    <div ng-repeat="mem in selMem">
+                        <ul>
+                            <li style="list-style:none;" ng-if="mem.isAdded"><i style="margin-right:3px;" class="icon icon-remove icon-primary" ng-click="shwMemExcl(mem)"></i>{{mem.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
+        </accordion>
+    </div>   
+</div>
+</div>
+
+<!-- </div> -->
+</div>

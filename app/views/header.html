@@ -1,0 +1,36 @@
+<div class="navbar navbar-inverse " ng-class="{'navbar-static-top': isActive('/collections'), 'navbar-fixed-top': !isActive('/collections')}" ng-controller="HeaderCtrl" ng-style="setNavbarStyle()">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img src="/images/Logo_CCT.png"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav " ng-show="isAuthenticated()">
+        <li style="margin-left:-55px;" ng-class="{active: isActive('/draft')}"><a href="/draft">Draft Collections</a>
+        </li>
+        <li ng-class="{active: isActive('/collections')}"><a href="/collections">Current Collections</a>
+        </li>
+
+        <li ng-class="{active: isActive('/collections/manage/rules')}"><a href="/collections/manage/rules">Create
+                    Collections</a>
+        </li>
+
+
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+        <li style="margin-top:-70px;" ng-show="hasPendingRequests()">
+            <i class="icon-spinner icon-spin icon-large" style="color:white"></i>
+        </li>
+        <login-toolbar></login-toolbar>
+    </ul>
+
+</div>
+
+        <!--/.navbar-collapse -->
+    </div>
+</div>

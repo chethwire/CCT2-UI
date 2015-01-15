@@ -1,0 +1,223 @@
+[{
+    "name": "Open Access Journal Content",
+    "id":"abc12",
+    "itemMem": [{
+        "name": "Rethinking turbidite paleoseismology along the Cascadia subduction zone",
+        "doi": "10.1130/G35902.1"
+    }, {
+        "name": "Erosion rate and previous extent of interior layered deposits on Mars revealed by obstructed landslides",
+        "doi": "10.1130/G35790.1"
+    }, {
+        "name": "Extreme warming of tropical waters during the Paleoceneâ€“Eocene Thermal Maximum",
+        "doi": "10.1130/G35637.1"
+    }, {
+        "name": "Herd structure in Late Cretaceous polar dinosaurs: A remarkable new dinosaur tracksite, Denali National Park, Alaska, USA",
+        "doi": "10.1130/G35740.1"
+    }, {
+        "name": "Dramatic effects of stress on metamorphic reactions",
+        "doi": "10.1130/G35718.1"
+    }, {
+        "name": "A cool temperate climate on the Antarctic Peninsula through the latest Cretaceous to early Paleogene",
+        "doi": "10.1130/G35512.1"
+    }, {
+        "name": "Paleomagnetism reveals the emplacement age of tsunamigenic coral boulders on Ishigaki Island, Japan",
+        "doi": "10.1130/G35366.1"
+    }]
+}, {
+    "name": "Glaciation Formation",
+    "id": "abc22",
+    "itemMem": [{
+        "name": "Paleo- to Mesoarchean polymetamorphism in the Barberton Granite-Greenstone Belt, South Africa: Constraints from U-Pb monazite and Lu-Hf garnet geochronology on the tectonic processes that shaped the belt",
+        "doi": "10.1130/B30807.1"
+    }, {
+        "name": "Replacement origin for hematite in 2.5 Ga banded iron formation: Evidence for postdepositional oxidation of iron-bearing minerals",
+        "doi": "10.1130/B30944.1"
+    }, {
+        "name": "Detrital zircon evidence for non-Laurentian provenance, Mesoproterozoic (ca. 1490â€“1450 Ma) deposition and orogenesis in a reconstructed orogenic belt, northern New Mexico, USA: Defining the Picuris orogeny",
+        "doi": "10.1130/B30804.1"
+    }, {
+        "name": "The Laurentian record of Neoproterozoic glaciation, tectonism, and eukaryotic evolution in Death Valley, California",
+        "doi": "10.1130/B30789.1"
+    }, {
+        "name": "A new view of an old suture zone: Evidence for sinistral transpression in the Cheyenne belt",
+        "doi": "10.1130/B30679.1"
+    }]
+
+}, {
+    "name": "2014 Open Access Journal Content",
+    "id": "abc32",
+    "itemMem": [{
+            "name": "Sediment transfer and deposition in slope channels: Deciphering the record of enigmatic deep-sea processes from outcrop",
+            "doi": "10.1130/B30996.1"
+        }, {
+            "name": "Major earthquake at the Pleistocene-Holocene transition in Lake VÃ¤ttern, southern Sweden",
+            "doi": "10.1130/G35499.1"
+        }, {
+            "name": "Volumetric budget and grain-size fractionation of a geological sediment routing system: Eocene Escanilla Formation, south-central Pyrenees",
+            "doi": "10.1130/B30954.1"
+        }, {
+            "name": "Complex mineral zoning patterns caused by ultra-local equilibrium at reaction interfaces",
+            "doi": "10.1130/G35287.1"
+        }, {
+            "name": "Reconciling early impacts and the rise of life",
+            "doi": "10.1130/focus052014.1"
+        }, {
+            "name": "Sublithospheric small-scale convectionâ€”A mechanism for collision zone magmatism",
+            "doi": "10.1130/G35193.1"
+        }, {
+            "name": "Cenozoic tectonic history of the South Georgia microcontinent and potential as a barrier to Pacific-Atlantic through flow",
+            "doi": "10.1130/G35091.1"
+        }
+
+    ]
+}, {
+    "name": "Books Collection Demo",
+    "id":"abc42",
+    "itemMem": [{
+        "name": "Fall Getaways",
+        "doi": "897i.dhjfgsjd09"
+    }, {
+        "name": "Toddler's Year 2 Developments",
+        "doi": "reiuy8.djfhg9"
+    }, {
+        "name": "Flu quick remedies",
+        "doi": "345.dkjhfgkf34"
+    }, {
+        "name": "Fall Colors",
+        "doi": "874.dfhgdfg90"
+    }, {
+        "name": "West-coast Canyons",
+        "doi": "78465.djfhgk8"
+    }]
+}, {
+    "name": "Geosphere Themed Issue - Geodynamics and Consequences of Lithospheric Removal in the Sierra Nevada, California",
+    "id":"abc52",
+    "itemMem": [{
+        "name": "Dummy experts",
+        "doi": "jhd78.dfjghkdfj"
+    }, {
+        "name": "Think Tank",
+        "doi": "6237.jdsfhkjds"
+    }, {
+        "name": "Blind optimism",
+        "doi": "jhdf.839457jhs"
+    }, {
+        "name": "Toddler's Year 2 Developments",
+        "doi": "reiuy8.djfhg9"
+    }, {
+        "name": "Flu quick remedies",
+        "doi": "345.dkjhfgkf34"
+    }]
+    }, 
+    {"name": "Books Collection Demo1",
+    "id": "abc62",
+    "itemMem": [{
+        "name": "Rethinking turbidite paleoseismology along the Cascadia subduction zone",
+        "doi": "10.1130/G35902.1"
+    }, {
+        "name": "Erosion rate and previous extent of interior layered deposits on Mars revealed by obstructed landslides",
+        "doi": "10.1130/G35790.1"
+    }, {
+        "name": "Extreme warming of tropical waters during the Paleoceneâ€“Eocene Thermal Maximum",
+        "doi": "10.1130/G35637.1"
+    }, {
+        "name": "Herd structure in Late Cretaceous polar dinosaurs: A remarkable new dinosaur tracksite, Denali National Park, Alaska, USA",
+        "doi": "10.1130/G35740.1"
+    }, {
+        "name": "Dramatic effects of stress on metamorphic reactions",
+        "doi": "10.1130/G35718.1"
+    }, {
+        "name": "A cool temperate climate on the Antarctic Peninsula through the latest Cretaceous to early Paleogene",
+        "doi": "10.1130/G35512.1"
+    }, {
+        "name": "Paleomagnetism reveals the emplacement age of tsunamigenic coral boulders on Ishigaki Island, Japan",
+        "doi": "10.1130/G35366.1"
+    }]
+}, {
+    "name": "Glaciation Formation",
+    "id": "abc72",
+    "itemMem": [{
+        "name": "Paleo- to Mesoarchean polymetamorphism in the Barberton Granite-Greenstone Belt, South Africa: Constraints from U-Pb monazite and Lu-Hf garnet geochronology on the tectonic processes that shaped the belt",
+        "doi": "10.1130/B30807.1"
+    }, {
+        "name": "Replacement origin for hematite in 2.5 Ga banded iron formation: Evidence for postdepositional oxidation of iron-bearing minerals",
+        "doi": "10.1130/B30944.1"
+    }, {
+        "name": "Detrital zircon evidence for non-Laurentian provenance, Mesoproterozoic (ca. 1490â€“1450 Ma) deposition and orogenesis in a reconstructed orogenic belt, northern New Mexico, USA: Defining the Picuris orogeny",
+        "doi": "10.1130/B30804.1"
+    }, {
+        "name": "The Laurentian record of Neoproterozoic glaciation, tectonism, and eukaryotic evolution in Death Valley, California",
+        "doi": "10.1130/B30789.1"
+    }, {
+        "name": "A new view of an old suture zone: Evidence for sinistral transpression in the Cheyenne belt",
+        "doi": "10.1130/B30679.1"
+    }]
+
+}, {
+    "name": "2014 Open Access Journal Content",
+    "id": "abc82",
+    "itemMem": [{
+            "name": "Sediment transfer and deposition in slope channels: Deciphering the record of enigmatic deep-sea processes from outcrop",
+            "doi": "10.1130/B30996.1"
+        }, {
+            "name": "Major earthquake at the Pleistocene-Holocene transition in Lake VÃ¤ttern, southern Sweden",
+            "doi": "10.1130/G35499.1"
+        }, {
+            "name": "Volumetric budget and grain-size fractionation of a geological sediment routing system: Eocene Escanilla Formation, south-central Pyrenees",
+            "doi": "10.1130/B30954.1"
+        }, {
+            "name": "Complex mineral zoning patterns caused by ultra-local equilibrium at reaction interfaces",
+            "doi": "10.1130/G35287.1"
+        }, {
+            "name": "Reconciling early impacts and the rise of life",
+            "doi": "10.1130/focus052014.1"
+        }, {
+            "name": "Sublithospheric small-scale convectionâ€”A mechanism for collision zone magmatism",
+            "doi": "10.1130/G35193.1"
+        }, {
+            "name": "Cenozoic tectonic history of the South Georgia microcontinent and potential as a barrier to Pacific-Atlantic through flow",
+            "doi": "10.1130/G35091.1"
+        }
+
+    ]
+}, {
+    "name": "Books Collection Demo",
+    "id": "abc92",
+    "itemMem": [{
+        "name": "Fall Getaways",
+        "doi": "897i.dhjfgsjd09"
+    }, {
+        "name": "Toddler's Year 2 Developments",
+        "doi": "reiuy8.djfhg9"
+    }, {
+        "name": "Flu quick remedies",
+        "doi": "345.dkjhfgkf34"
+    }, {
+        "name": "Fall Colors",
+        "doi": "874.dfhgdfg90"
+    }, {
+        "name": "West-coast Canyons",
+        "doi": "78465.djfhgk8"
+    }]
+}, {
+    "name": "Geosphere Themed Issue - Geodynamics and Consequences of Lithospheric Removal in the Sierra Nevada, California",
+    "id":"abc11",
+    "itemMem": [{
+        "name": "Dummy experts",
+        "doi": "jhd78.dfjghkdfj"
+    }, {
+        "name": "Think Tank",
+        "doi": "6237.jdsfhkjds"
+    }, {
+        "name": "Blind optimism",
+        "doi": "jhdf.839457jhs"
+    }, {
+        "name": "Toddler's Year 2 Developments",
+        "doi": "reiuy8.djfhg9"
+    }, {
+        "name": "Flu quick remedies",
+        "doi": "345.dkjhfgkf34"
+    }]
+
+
+}]

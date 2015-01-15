@@ -1,0 +1,27 @@
+<div class="form-group">
+    <div style="height:135px;">
+        <label style="margin-top:5px;margin-left:-379px;" for="subjSel">Select Subjects</label>
+        <select style="margin-top:29px;width:70%;" multiple="multiple" class="form-control pull-left" id="subjSel" ng-model="subjTerms" ng-options="option for option in subSearch" ng-change="shwSubSearch(subjTerms)"></select>
+        <select style="width:13%;position:relative;top:17px;left:50px;" class="form-control" ng-model="searchBoolean.value" ng-options="option for option in searchBoolean.values"></select>
+    </div>
+
+    <div style="height:60px;">
+        <label style="display:block;"> Content Type </label>
+        <span style="padding-right:35px;" ng-repeat="content in searchContent"><input type="checkbox" style="display:inline;margin-right: 7px;" ng-model="content.checked">{{content.type}}</span>        
+    </div>
+
+    <div style="height:60px;">
+        <label style="display:block;">Date Range</label>
+        <span style="padding-right: 20px;">From</span><input type="text" style="height:20px;margin-right:20px;" date-picker ng-model="fromDate"><i style="margin-left:-38px;" class="icon-calendar icon-primary"></i>
+        <span style="padding-right: 20px;margin-left:105px;">To</span><input type="text" style="height:20px;margin-right:20px;" date-picker ng-model="toDate"><i style="margin-left:-38px;" class="icon-calendar icon-primary"></i>
+    </div>
+
+    <div>
+    	<label style="display:block;">Conditional Search</label>
+			<input type="text" style="display:inline;" ng-model="condOne"><input type="checkbox" style="display:inline;margin-left:5px;" ng-model="exact.checked"><span>Exact</span>
+			<select style="background-color:transparent;height:30px;margin-left:37px;" ng-model="searchCondition.value" ng-options="val for val in searchCondition.values"></select>
+			<select style="width:13%;position:relative;top:-31px;left:384px;" class="form-control" ng-model="searchBoolean.value" ng-options="option for option in searchBoolean.values"></select>		
+			<button type="button" style="display:block;margin-top:-58px;margin-left:473px;font-size: 12px;" add-row-search-cond>Add row<i class="icon icon-plus-sign icon-primary"></i></button>
+			<div id="addRows"></div>
+    </div>
+</div>

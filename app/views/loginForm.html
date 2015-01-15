@@ -1,0 +1,92 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron loginHeader">
+    <div class="container">
+        <p class="lead">Log-in to your account</p></div>
+</div>
+
+<div class="container loginMainContainer" ng-hide="showLoginSelector">
+
+    <div class="row">
+        <div class="col-lg-7 col-md-7">
+            <h3>Build collections to support a new generation</h3>
+
+            <p class="lead">of discoverability and revenue-generating products.</p>
+
+            <a href="http://community.highwire.org/content.php?208-Custom-Collection-Toolkit">About CCT</a><br>
+            <a href="http://community.highwire.org/content.php?208-Custom-Collection-Toolkit">Help & Tutorials</a> <br>
+            <a href="mailto:cct-help@highwire.stanford.edu">Contact HighWire</a> <br>
+        </div>
+        <div class="col-lg-5 col-md-5">
+            <!--<div class="alert alert-warning" ng-show="authReason">-->
+            <!--{{authReason}}-->
+            <!--</div>-->
+            <p class="text-danger text-center" ng-show="authError">
+                {{authError}}
+            </p>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" novalidate autofill-submit="login()" role="form">
+
+                        <div class="form-group">
+                            <label for="inputEmail1" class="col-lg-4 col-md-4 control-label">User Name</label>
+
+                            <div class="col-lg-7 col-md-7">
+                                <input class="form-control" id="inputEmail1" ng-model="user.email" required autofocus autofill>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1" class="col-lg-4 col-md-4 control-label">Password</label>
+
+                            <div class="col-lg-7 col-md-7">
+                                <input class="form-control" id="inputPassword1" type="password" ng-model="user.password"
+                                       required autofill>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-4 col-lg-8 col-md-offset-4 col-md-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="keepMeLoggedIn"> Keep me logged-in
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button type="submit"
+                                    class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 btn btn-primary btn-lg"
+                                     id="login-btn">Log-in
+                            </button>
+                        </div>
+
+                        <!--<div class="row">-->
+                            <!--<a href="" class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1">Forgot your-->
+                                <!--password?</a>-->
+
+                        <!--</div>-->
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="container" ng-show="showLoginSelector">
+   <div class="panel panel-default col-lg-6 col-lg-offset-3 ">
+        <h3>Multiple valid logins found<br>
+            <small>Please select one below:</small>
+        </h3>
+        <div class="list-group">
+            <a href="" class="list-group-item" ng-repeat="login in authorizedLogins | orderBy:'name'" ng-click="selectLogin(login)">
+                {{login.name}}
+            </a>
+        </div>
+
+    </div>
+</div>

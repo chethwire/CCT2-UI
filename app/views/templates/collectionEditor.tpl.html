@@ -1,0 +1,197 @@
+<form class="form-horizontal" role="form" name="publishForm">
+    <div class="form-group">
+        <div class="col-lg-3">
+            <h4>Collection Details</h4>
+        </div>
+    </div>
+    <div style="position:relative;left:-75px;" class="form-group"
+         ng-class="{'alert alert-danger': publishForm.name.$dirty && publishForm.name.$invalid}">
+
+        <label for="name" class="col-lg-3 control-label">Collection Name</label>
+
+        <div class="col-lg-9">
+            <input class="form-control" id="name" name="name" required="" autofocus="" type="text"
+                   ng-model="collection.name" ng-focus="strInd()" char-limit="140">
+
+            <p class="help-block error"
+               ng-show="publishForm.name.$dirty && publishForm.name.$invalid">The collection name has already been used or is empty</p>
+           <p class="help-block error" style="background-color:pink;color:red;"
+               ng-show="chkDup">The collection name has already been used</p>
+
+
+        </div>
+
+    </div>
+    <div style="position:relative;left:-75px;" class="form-group"
+         ng-class="{'alert alert-danger': publishForm.description.$dirty && publishForm.description.$invalid}">
+        <label for="description" class="col-lg-3 control-label">Description</label>
+     
+        <div class="col-lg-9">
+            <textarea class="form-control" id="description" rows="5" ng-model="collection.description"
+                      name="description" required="" autofocus="" char-limit="2000"></textarea>
+
+        </div>
+    </div>
+  
+    <div style = "position:relative;top:5px;left:-75px;" class="form-group"
+         ng-class="{'alert alert-danger': publishForm.citationFormat.$dirty && publishForm.citationFormat.$invalid}">
+        <label for="citationFormat" class="col-lg-3 control-label">Citation Format</label>
+
+        <div class="col-lg-9">           
+            <collection-editor-citations collection="collection" cit-frm="citations" get-cit="citForm(citations)"></collection-editor-citations>            
+        </div>
+    </div>
+
+    <div style = "position:relative;top:-375px;left:-75px;" class="form-group" 
+         ng-class="{'alert alert-danger': publishForm.rssId.$dirty && publishForm.rssId.$invalid}">
+        <label for="rssId" class="col-lg-3 control-label">RSS feed URL alias</label>
+
+        <div class="col-lg-9">
+            <input type="text" class="form-control" id="rssId" name="rssId" ng-model="collection.rssId" required="" autofocus=""
+                   unique-rss
+                   char-limit="200">
+            <span class="help-block">http://cct.highwire.org/rss/{{publisherId}}/{{collection.rssId}}</span>
+
+            <p class="help-block warning"
+               ng-show=" publishForm.rssId.$dirty && publishForm.rssId.$invalid">This RSS name has already been used or
+                is
+                empty.</p>
+        </div>
+    </div>
+
+    <div style = "position:relative;top:-375px;left:-75px;" class="form-group"
+         ng-class="{'alert alert-danger': publishForm.landingPageId.$dirty && publishForm.landingPageId.$invalid}">
+        <label for="landingPageId" class="col-lg-3 control-label">Landing page URL alias</label>
+
+        <div class="col-lg-9">
+            <input type="text" class="form-control" id="landingPageId" name="landingPageId"
+                   ng-model="collection.landingPageId" required="" autofocus="" unique-landing-page char-limit="200">
+            <span class="help-block">{{publisherSettings.defaultLandingPagePath}}/{{collection.landingPageId}}</span>
+
+            <p class="help-block error"
+               ng-show=" publishForm.landingPageId.$dirty && publishForm.landingPageId.$invalid">This landing page name
+                has
+                already been used or is empty.</p>
+        </div>
+    </div>
+
+    <div style = "position:relative;top:-375px;left:-75px;" class="form-group  has-feedback">
+        <label class="control-label col-sm-3" for="availableStartDate">Available starting on</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="availableStartDate" date-picker
+                   ng-model="availableStartDate" min="0">
+            <span class="icon-calendar icon-primary form-control-feedback"></span>
+        </div>
+    </div>
+
+    <div style = "position:relative;top:-375px;left:-75px;" class="form-group">
+        <label for="name" class="col-lg-3 control-label">Keywords</label>
+
+        <div class="col-lg-9 keywords-label">
+            <input ng-model="collection.showKeywords" type="checkbox"><span> Display keywords for this Collection</span>
+
+        </div>
+
+
+        <div class="col-lg-9">
+            <div name="keywords" ui-select2="select2Options" ng-model="collection.keywords" style="width:100%"></div>
+
+            <i>
+                <small class="col-xs-9 text-muted ">Maximum 10 keywords</small>
+            </i>
+        </div>
+    </div>
+    <!--<div >-->
+        <!--<h4>eCommerce</h4><input ng-model="collection.ecommerceEnabled" type="checkbox" name="ecommerceEnabled" id="ecommerceEnabled"-->
+                                 <!--ng-false-value="false"-->
+                                 <!--ng-true-value="true"><span> Enable eCommerce for this Collection</span>-->
+        <!--<hr>-->
+
+
+        <!--<div class="form-group" ng-if="collection.ecommerceEnabled">-->
+            <!--<label for="individualPrice" class="col-lg-3 control-label">Individual price</label>-->
+
+            <!--<div class="col-lg-3">-->
+                <!--<div class="input-group">-->
+                    <!--<span class="input-group-addon"><i class="icon-dollar icon-primary"> </i></span>-->
+                    <!--<input type="number" class="form-control" id="individualPrice" min="0"-->
+                           <!--ng-model="collection.individualPrice" maxlength="7"-->
+                           <!--ng-required="collection.ecommerceEnabled">-->
+                <!--</div>-->
+
+            <!--</div>-->
+            <!--<label for="individualDuration" class="col-lg-3 control-label">Duration of-->
+                <!--availability</label>-->
+
+            <!--<div class="col-lg-3">-->
+                <!--<select ng-model="collection.individualDuration" id="individualDuration" bs-select>-->
+                    <!--<option value="1">1 Day</option>-->
+                    <!--<option value="7">1 Week</option>-->
+                    <!--<option value="30">1 Month</option>-->
+                    <!--<option value="90">3 Months</option>-->
+                    <!--<option value="180">6 Months</option>-->
+                    <!--<option value="365">1 Year</option>-->
+                    <!--<option value="0">Unlimited</option>-->
+
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+
+    <!--</div>-->
+    <h4 style = "position:relative;top:-375px;">Landing Page Appearance Settings</h4>
+    <hr style = "position:relative;top:-375px;">
+
+    <div style = "position:relative;top:-375px;left:-75px;" class="form-group">
+        <label for="featureImage" class="col-lg-3 control-label">Feature Image</label>
+
+        <div class="col-lg-4">
+            <input type="file" ng-file-select accept="image/*" id="featureImage"
+                   onchange="angular.element(this).scope().$emit('featureimage:add', this.files ? this.files : this);"
+                   style="height:40px;"/>
+            <!--<button class="btn btn-default"><i class="icon icon-remove-sign icon-large"></i></button>-->
+            <a href="" ng-click="removeFeatureImage()">remove</a>
+
+            <div ng-show="uploader.queue.length">
+                Uploading: {{ uploader.progress }}
+                <div class="progress">
+                    <div class="progress-bar active" role="progressbar" aria-valuenow="{{ uploader.progress }}"
+                         aria-valuemin="0" aria-valuemax="100" ng-style="{ 'width': uploader.progress + '%' }">
+                        <span class="sr-only">{{ uploader.progress }} Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <img class="img-rounded img-responsive"
+                 ng-src="{{apiBaseUrl}}?action=getFile&fileId={{collection.featureImageId}}&publisherId={{publisherId}}">
+        </div>
+
+    </div>
+    <hr style = "position:relative;top:-385px;">
+    <div class="clearfix"></div>
+
+    <div style = "position:relative;top:-385px;" class="form-group" ng-show="collectionAction==='publish'">
+        <div class="row">
+            <a class="col-lg-1" href="" ng-click="goBack()">&lsaquo; Go Back</a>
+
+            <div class="col-lg-offset-7 col-lg-4">
+                <button class="btn btn-primary btn-lg" ng-click="addCollection(publishForm)" type="submit"
+                        analytics-on="click"
+                        analytics-event="Publish Collection">Publish Collection <i
+                        class="icon-ok icon-large"></i></button>
+            </div>
+        </div>
+    </div>
+    <div style = "position:relative;top:-385px;" class="form-group" ng-show="collectionAction==='update'">
+        <div class="row">
+            <a class="col-lg-1" href="" ng-click="goBack()">&lsaquo; Go Back</a>
+
+            <div class="col-lg-offset-7 col-lg-4">
+                <button class="btn btn-primary btn-lg" ng-click="updateCollection(publishForm)" type="submit"
+                        analytics-on="click"
+                        analytics-event="Update Collection">Update Collection <i
+                        class="icon-ok icon-large"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,31 @@
+{
+  "name": "client",
+  "version": "0.0.0",
+  "dependencies": {
+    "json3": "~3.2.6",
+    "jquery": "~2.0.3",
+    "es5-shim": "~2.0.8",
+    "angular-resource": "~1.2.7",
+    "angular-cookies": "~1.2.7",
+    "angular-sanitize": "~1.2.7",
+    "angular-route": "~1.2.7",
+    "font-awesome": "~3.2.1",
+    "angular-local-storage": "*",
+    "jquery.cookie": "~1.3.1",
+    "angular-animate": "~1.2.7",
+    "animate.css": "~2.1.0",
+    "angular-masonry": "~0.7.0",
+    "jquery-ui": "~1.10.3",
+    "angulartics": "~0.8.7",
+    "speakingurl": "~0.3.1",
+    "filament-sticky": "~0.1.3",
+    "angular-strap": "~0.7.8",
+    "angular-ui-sortable": "~0.0.1",
+    "angular-ui-select2": "~0.0.4",
+    "bugsense": "~2.0.0",
+    "angular-ui-date": "~0.0.3",
+    "angular-scenario": "~1.2.7",
+   
+    "bootstrap-sass": "git://github.com/twbs/bootstrap-sass.git#~3.1.1"
+  }
+}

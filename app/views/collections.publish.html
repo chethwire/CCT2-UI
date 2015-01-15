@@ -1,0 +1,22 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div ng-file-drop class="subHeader">
+    <div class="container">
+        <!--<a href="#" class="pull-right">Preview</a>-->
+
+        <p class="lead">{{lead}}</p>
+        <!--<pre>{{collection}}</pre>-->
+
+        <div class="panel panel-default col-lg-6 col-lg-offset-3" ng-show="analyzing">
+            <p class="text-center"> Publishing your collection, this may take a moment. <img
+                    src="/images/CCT_processing.png"
+                    class="icon-spin-reverse"
+                    style="margin-top: 10px;"></p>
+        </div>
+    </div>
+</div>
+
+<div class="container" ng-hide="analyzing">
+    <collection-editor></collection-editor>
+
+
+</div>

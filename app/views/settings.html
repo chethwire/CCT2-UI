@@ -1,0 +1,43 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div ng-file-drop class="subHeader">
+    <div class="container">
+
+
+        <p class="lead">Settings</p>
+        <!--<pre>{{collection}}</pre>-->
+    </div>
+</div>
+<div class="container">
+    <form class="form-horizontal" role="form" name="settingsForm" novalidate>
+        <h4>Default Landing Page Settings</h4>
+
+
+        <div class="form-group">
+            <label for="defaultLandingPagePath" class="col-xs-3 control-label">Default Landing Page Path</label>
+
+
+            <div class="col-xs-3">
+            <input type="text"  id="defaultLandingPagePath" class="form-control"
+            ng-model="publisherSettings.defaultLandingPagePath"
+            >
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <a class="pull-left" href="/" >Cancel</a>
+
+            <div class="col-lg-offset-9 col-lg-3">
+
+                <button class="btn btn-primary" ng-click="addPublisherSettings(settingsForm)" type="submit">Save
+                    Settings <i
+                            class="icon-ok icon-large"></i></button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
